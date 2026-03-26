@@ -1,1 +1,6 @@
 pratyush,1234,40
+dhruv,890,12
+wd,dd,3
+prat,123,0
+pratyush3,ee,8
+dd,ee,14

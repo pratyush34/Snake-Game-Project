@@ -75,7 +75,6 @@ void game(char *name)
     char c, l;
     clock_t t;
     int speed =250;
-    int r=1;
 
     x = (int *)malloc(len * sizeof(int) * (len + 1));
     y = (int *)malloc(len * sizeof(int) * (len + 1));
@@ -121,29 +120,33 @@ void game(char *name)
                 gotoxy(x[0], ++y[0]);
 
                 printf("%c", 153);
-                if (y[0] >= 28)
+                if (y[0] >= 28){
                     over(x[0], y[0], len, name);
+                }
                 break;
             case 'w':
                 move(x, y, &l, c, len);
                 gotoxy(x[0], --y[0]);
                 printf("%c", 153);
-                if (y[0] <= 0)
-                    over(x[0], y[0], len, name);
+                if (y[0] <= 0){
+                    over(x[0], y[0], len, name); 
+                }
                 break;
             case 'a':
                 move(x, y, &l, c, len);
                 gotoxy(x[0] = x[0] - 2, y[0]);
                 printf("%c", 153);
-                if (x[0] <= 0)
+                if (x[0] <= 0){
                     over(x[0], y[0], len, name);
+                }
                 break;
             case 'd':
                 move(x, y, &l, c, len);
                 gotoxy(x[0] = x[0] + 2, y[0]);
                 printf("%c", 153);
-                if (x[0] >= 119)
+                if (x[0] >= 119){
                     over(x[0], y[0], len, name);
+                }
                 break;
             default:
                 break;
@@ -151,7 +154,9 @@ void game(char *name)
             for (int i = 4; i < len; i++)
             {
                 if (x[0] == x[i] && y[0] == y[i])
+                {
                     over(x[0], y[0], len, name);
+                }
             }
 
         } while (x[0] != px || y[0] != py);
@@ -194,7 +199,9 @@ void over(int x, int y, int len, char *name)
     saveScore(name, len - 1);
     showLeaderboard();
     printf("%cDo you want to retry? (Y/N)", 179);
-    char c = getch();
+    char c;
+    while(1){
+    c = getch();
     if (c == 'Y' || c == 'y')
     {
         system("cls");
@@ -205,4 +212,8 @@ void over(int x, int y, int len, char *name)
     {
         exit(0);
     }
+    else{
+        continue;
+    }
+}
 }
