@@ -3,25 +3,22 @@
 #include <string.h>
 #include <conio.h>
 
-/* data.txt format: name,password,score */
-
-/* Helper: read password with * masking */
 void readPassword(char *pass)
 {
     int i = 0;
     char c;
-    while ((c = getch()) != '\r')   /* '\r' = Enter key */
+    while ((c = getch()) != '\r') /* '\r' = Enter key */
     {
-        if (c == '\b')              /* Backspace */
+        if (c == '\b') /* Backspace */
         {
             if (i > 0)
             {
                 i--;
-                printf("\b \b");    /* erase last * on screen */
+                printf("\b \b"); /* erase last * on screen */
                 fflush(stdout);
             }
         }
-        else if (i < 49)            /* max 49 chars */
+        else if (i < 49) /* max 49 chars */
         {
             pass[i++] = c;
             printf("*");
@@ -138,7 +135,7 @@ void login(char *name)
 
 void saveScore(char *name, int score)
 {
-    FILE *f    = fopen("data.txt", "r");
+    FILE *f = fopen("data.txt", "r");
     FILE *temp = fopen("temp.txt", "w");
     char line[50], pass[50];
     int s;
