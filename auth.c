@@ -7,18 +7,18 @@ void readPassword(char *pass)
 {
     int i = 0;
     char c;
-    while ((c = getch()) != '\r') /* '\r' = Enter key */
+    while ((c = getch()) != '\r') 
     {
-        if (c == '\b') /* Backspace */
+        if (c == '\b') 
         {
             if (i > 0)
             {
                 i--;
-                printf("\b \b"); /* erase last * on screen */
+                printf("\b \b");
                 fflush(stdout);
             }
         }
-        else if (i < 49) /* max 49 chars */
+        else if (i < 49)
         {
             pass[i++] = c;
             printf("*");
@@ -36,12 +36,12 @@ void login(char *name)
     gotoxy(1, 1);
     printf("</SNAKE GAME>\n");
 
-    /* --- Get username --- */
+
     printf("%cENTER YOUR USERNAME : ", 179);
     fflush(stdout);
     scanf("%s", name);
 
-    /* --- Search in file --- */
+
     FILE *f = fopen("data.txt", "a+");
     char line[50], pass[50];
     int score, found = 0;
@@ -52,8 +52,6 @@ void login(char *name)
         if (strcmp(line, name) == 0)
         {
             found = 1;
-
-            /* --- Returning user: ask password (3 attempts) --- */
             int attempts = 3;
             int ok = 0;
             while (attempts--)
@@ -101,11 +99,10 @@ void login(char *name)
         fflush(stdout);
         readPassword(newpass);
 
-        printf("%cConfirm password       : ", 179);
+        printf("%cConfirm password : ", 179);
         fflush(stdout);
         readPassword(confirm);
 
-        /* Keep asking until passwords match */
         while (strcmp(newpass, confirm) != 0)
         {
             printf("%cPasswords do not match! Try again.\n", 179);
@@ -142,7 +139,7 @@ void saveScore(char *name, int score)
 
     while (fscanf(f, "%[^,],%[^,],%d\n", line, pass, &s) == 3)
     {
-        if (strcmp(line, name) == 0)
+        if (strcmp(line, name) == 0 && score > s)
             fprintf(temp, "%s,%s,%d\n", name, pass, score);
         else
             fprintf(temp, "%s,%s,%d\n", line, pass, s);
@@ -165,7 +162,6 @@ void showLeaderboard()
         count++;
     fclose(f);
 
-    /* bubble sort descending by score */
     for (int i = 0; i < count - 1; i++)
         for (int j = 0; j < count - i - 1; j++)
             if (scores[j] < scores[j + 1])

@@ -165,7 +165,7 @@ void game(char *name)
         printf("%d %d",(len-1)/10,(len-1)%10);
 
 
-        if(speed!=100)speed-=10;
+        if(speed>=70)speed-=10;
 
         x = (int *)realloc(x, sizeof(int) * (len + 1));
         y = (int *)realloc(y, sizeof(int) * (len + 1));
