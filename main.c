@@ -16,7 +16,7 @@ int main() {
   login(name);
 
   while (1) {
-    int selection = mainMenu(); // Show interactive menu
+    int selection = mainMenu(); 
 
     switch (selection) {
     case 1:
