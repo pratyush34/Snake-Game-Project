@@ -1,11 +1,11 @@
-#include "aaextra.c"
-#include "auth.c"
-#include "gamePlay.c"
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
-// #include <time.h>
+#include <time.h>
 #include <windows.h>
+#include "visuals.c"
+#include "gamePlay.c"
+#include "auth.c"
 
 int main() {
   system("mode con: cols=120 lines=30");

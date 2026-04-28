@@ -46,7 +46,9 @@ void move(int *x, int *y, char *l, char c, int len) {
   *l = c;
   if (len > 1) {
     gotoxy(x[1], y[1]);
+    setColor(10);
     printf("o");
+    setColor(15);
   }
 }
 
@@ -59,6 +61,8 @@ int check(int px, int py, int *x, int *y, int len) {
 }
 
 void game(char *name) {
+  system("cls");
+  boundary();
   srand(time(NULL));
   int *x, *y, px = ((rand() % 57) * 2) + 3, py = (rand() % 27) + 1, len = 1;
   char c, l;
@@ -74,10 +78,14 @@ void game(char *name) {
   printf("s c o r e : 0 0");
 
   gotoxy(px, py);
-  printf("%c", 254);
+  setColor(12);
+  printf("%c", 235);
+  setColor(15);
 
   gotoxy(x[0], y[0]);
+  setColor(10);
   printf("%c", 154);
+  setColor(15);
 
   while (1) {
     do {
@@ -104,7 +112,9 @@ void game(char *name) {
         move(x, y, &l, c, len);
         gotoxy(x[0], ++y[0]);
 
+        setColor(10);
         printf("%c", 153);
+        setColor(15);
         if (y[0] >= 28) {
           over(x[0], y[0], len, name);
         }
@@ -112,7 +122,9 @@ void game(char *name) {
       case 'w':
         move(x, y, &l, c, len);
         gotoxy(x[0], --y[0]);
+        setColor(10);
         printf("%c", 153);
+        setColor(15);
         if (y[0] <= 0) {
           over(x[0], y[0], len, name);
         }
@@ -120,7 +132,9 @@ void game(char *name) {
       case 'a':
         move(x, y, &l, c, len);
         gotoxy(x[0] = x[0] - 2, y[0]);
+        setColor(10);
         printf("%c", 153);
+        setColor(15);
         if (x[0] <= 0) {
           over(x[0], y[0], len, name);
         }
@@ -128,7 +142,9 @@ void game(char *name) {
       case 'd':
         move(x, y, &l, c, len);
         gotoxy(x[0] = x[0] + 2, y[0]);
+        setColor(10);
         printf("%c", 153);
+        setColor(15);
         if (x[0] >= 119) {
           over(x[0], y[0], len, name);
         }
@@ -143,24 +159,20 @@ void game(char *name) {
           over(x[0], y[0], len, name);
         }
       }
-      for (int i = 4; i < len; i++) {
-        if (x[0] == x[i] && y[0] == y[i]) {
-          over(x[0], y[0], len, name);
-        }
-      }
 
     } while (x[0] != px || y[0] != py);
 
     gotoxy(x[len], y[len]);
     munchSound();
+    setColor(10);
     printf("o");
+    setColor(15);
     len++;
 
     gotoxy(114, 1);
     printf("%d %d", (len - 1) / 10, (len - 1) % 10);
 
-    if (speed >= 70)
-      speed -= 10;
+    if (speed >= 70)speed -= 10;
 
     x = (int *)realloc(x, sizeof(int) * (len + 1));
     y = (int *)realloc(y, sizeof(int) * (len + 1));
@@ -170,7 +182,9 @@ void game(char *name) {
     } while (check(px, py, x, y, len));
 
     gotoxy(px, py);
-    printf("%c", 254);
+    setColor(12);
+    printf("%c", 235);
+    setColor(15);
   }
 }
 
@@ -183,7 +197,7 @@ void over(int x, int y, int len, char *name) {
   printf("%cScore : %d \n", 179, len - 1);
   saveScore(name, len - 1);
   showLeaderboard();
-  printf("%cDo you want to retry? (Y/N)", 179);
+  printf("\n%cDo you want to retry? (Y/N)", 179);
   char c;
   while (1) {
     c = getch();

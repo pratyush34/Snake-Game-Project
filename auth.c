@@ -24,12 +24,7 @@ void readPassword(char *pass) {
 }
 
 void login(char *name) {
-  system("cls");
-  boundary();
-  gotoxy(1, 1);
-  printf("</SNAKE GAME>\n");
-
-  printf("%cENTER YOUR USERNAME : ", 179);
+  printf("ENTER YOUR USERNAME : ");
   fflush(stdout);
   scanf("%s", name);
 
@@ -45,7 +40,7 @@ void login(char *name) {
       int ok = 0;
       while (attempts--) {
         char entered[50];
-        printf("%cENTER PASSWORD : ", 179);
+        printf("ENTER PASSWORD : ");
         fflush(stdout);
         readPassword(entered);
 
@@ -53,20 +48,20 @@ void login(char *name) {
           ok = 1;
           break;
         } else {
-          printf("%cWrong password! %d attempt(s) left.\n", 179, attempts);
+          printf("Wrong password! %d attempt(s) left.\n", attempts);
           fflush(stdout);
         }
       }
 
       if (!ok) {
-        printf("%cToo many wrong attempts. Exiting.\n", 179);
+        printf("Too many wrong attempts. Exiting.\n");
         fflush(stdout);
         fclose(f);
         getch();
         exit(1);
       }
 
-      printf("%cWelcome back %s! Your last score : %d\n", 179, name, score);
+      printf("Welcome back %s! Your last score : %d\n", name, score);
       fflush(stdout);
       break;
     }
@@ -75,38 +70,33 @@ void login(char *name) {
   if (!found) {
     char newpass[50], confirm[50];
 
-    printf("%cNew user! Create a password : ", 179);
+    printf("New user! Create a password : ");
     fflush(stdout);
     readPassword(newpass);
 
-    printf("%cConfirm password : ", 179);
+    printf("Confirm password : ");
     fflush(stdout);
     readPassword(confirm);
 
     while (strcmp(newpass, confirm) != 0) {
-      printf("%cPasswords do not match! Try again.\n", 179);
+      printf("Passwords do not match! Try again.\n");
       fflush(stdout);
 
-      printf("%cCreate a password : ", 179);
+      printf("Create a password : ");
       fflush(stdout);
       readPassword(newpass);
 
-      printf("%cConfirm password  : ", 179);
+      printf("Confirm password  : ");
       fflush(stdout);
       readPassword(confirm);
     }
 
     fprintf(f, "%s,%s,0\n", name, newpass);
-    printf("%cWelcome %s! Password saved.\n", 179, name);
+    printf("Welcome %s! Password saved.\n", name);
     fflush(stdout);
   }
 
   fclose(f);
-  printf("%cUse W, A, S & D for movements.\n", 179);
-  printf("%cEnter any key to continue.", 179);
-  getch();
-  system("cls");
-  boundary();
 }
 
 void saveScore(char *name, int score) {
