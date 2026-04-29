@@ -4,3 +4,9 @@ wd,dd,3
 prat,123,0
 pratyush3,ee,8
 dd,ee,14
+veeru,780,9
+hello,1234,1
+veeruYadav,123,9
+shaurya,123,15
+harsh,abc@123,0
+kartikey,1234,7
